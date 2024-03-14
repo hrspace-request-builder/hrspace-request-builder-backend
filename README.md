@@ -1,5 +1,5 @@
 # hrspace-request-builder-backend
-[![Test Suite](https://github.com/alexpro2022/template-FastAPI/actions/workflows/main.yml/badge.svg)](https://github.com/alexpro2022/template-FastAPI/actions/workflows/main.yml)
+
 
 Backend for hrspace-requst-builder
 
