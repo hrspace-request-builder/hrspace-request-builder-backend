@@ -20,11 +20,11 @@ class Settings(BaseSettings):
     secret_key: SecretStr = f"Secret key {DEFAULT_STR}"
 
     # DB settings
-    postgres_user: str = "postgres"
-    postgres_password: str = "postgres"
-    db_host: str = "db"
-    db_port: str = "5432"
-    postgres_db: str = "postgres"
+    postgres_user: str  # = "postgres"
+    postgres_password: str  # = "postgres"
+    db_host: str  # = "db"
+    db_port: str  # = "5432"
+    postgres_db: str  # = "postgres"
 
     @property
     def database_url(self) -> str:

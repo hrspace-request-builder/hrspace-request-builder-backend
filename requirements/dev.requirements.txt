@@ -5,3 +5,4 @@ fastapi
 pydantic-settings
 SQLAlchemy
 uvicorn[standard]
+starlette-admin
