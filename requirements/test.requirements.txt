@@ -1,0 +1,12 @@
+alembic
+asyncpg
+email-validator
+fastapi
+pydantic-settings
+SQLAlchemy
+uvicorn[standard]
+
+# tests
+pytest
+pytest-asyncio
+pytest-cov
