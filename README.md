@@ -39,10 +39,13 @@ docker compose -f docker/docker-compose.yml --env-file .env up -d --build
   - через Swagger доступный по адресу http://127.0.0.1:8000/docs
   - через админ панель по адресу http://127.0.0.1:8000/admin
 
+<br>
 2. Остановить docker и удалить контейнеры можно командой из корневой директории проекта:
+
 ```bash
 docker compose -f docker/docker-compose.yml --env-file .env down
 ```
+
 Если также необходимо удалить том базы данных:
 ```bash
 docker compose -f docker/docker-compose.yml --env-file .env down -v
