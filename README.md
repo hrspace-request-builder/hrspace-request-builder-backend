@@ -1,5 +1,5 @@
 # hrspace-request-builder-backend
-
+[![Test Suite](https://github.com/hrspace-request-builder/hrspace-request-builder-backend/actions/workflows/main.yml/badge.svg)](https://github.com/hrspace-request-builder/hrspace-request-builder-backend/actions/workflows/main.yml)
 
 Backend for hrspace-requst-builder
 
