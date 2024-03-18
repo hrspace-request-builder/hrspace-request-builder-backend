@@ -1,7 +1,9 @@
 # hrspace-request-builder-backend
-[![Test Suite](https://github.com/hrspace-request-builder/hrspace-request-builder-backend/actions/workflows/main.yml/badge.svg)](https://github.com/hrspace-request-builder/hrspace-request-builder-backend/actions/workflows/main.yml)
+[![CI/CD](https://github.com/hrspace-request-builder/hrspace-request-builder-backend/actions/workflows/main.yml/badge.svg)](https://github.com/hrspace-request-builder/hrspace-request-builder-backend/actions/workflows/main.yml)
 
-Backend for hrspace-requst-builder
+Проект развернут на удаленном сервере:
+  - Swagger доступен по адресу http://185.221.162.231:8000/docs
+  - админ панель доступна по адресу http://185.221.162.231:8000/admin
 
 ## Установка приложения:
 
@@ -38,9 +40,6 @@ docker compose -f docker/docker-compose.yml --env-file .env up -d --build
   Администрирование приложения может быть осуществлено:
   - через Swagger доступный по адресу http://127.0.0.1:8000/docs
   - через админ панель по адресу http://127.0.0.1:8000/admin
-
-  - через Swagger доступный по адресу http://185.221.162.231:8000/docs
-  - через админ панель по адресу http://185.221.162.231:8000/admin
 
 <br>
 2. Остановить docker и удалить контейнеры можно командой из корневой директории проекта:
