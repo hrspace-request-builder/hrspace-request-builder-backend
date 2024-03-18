@@ -1,7 +1,9 @@
 # hrspace-request-builder-backend
+[![CI/CD](https://github.com/hrspace-request-builder/hrspace-request-builder-backend/actions/workflows/main.yml/badge.svg)](https://github.com/hrspace-request-builder/hrspace-request-builder-backend/actions/workflows/main.yml)
 
-
-Backend for hrspace-requst-builder
+Проект развернут на удаленном сервере:
+  - Swagger доступен по адресу http://185.221.162.231:8000/docs
+  - админ панель доступна по адресу http://185.221.162.231:8000/admin
 
 ## Установка приложения:
 

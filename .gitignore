@@ -85,6 +85,7 @@ ipython_config.py
 fastapi.db
 test.db
 _main.yml
+_server*
 _test*
 =GARB=
 infra/local/admin
