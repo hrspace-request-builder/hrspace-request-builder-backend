@@ -1,16 +1,25 @@
 from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column
 
+from app.core.config import settings
+
 from .base import Base
 
 
-class Vacancy(Base):
-    title: Mapped[str] = mapped_column(String(256), unique=True, index=True)
-    description: Mapped[str] = mapped_column(String(2000), unique=True, index=True)
+class GenericModel(Base):
+    __abstract__ = True
+
+    name: Mapped[str] = mapped_column(
+        String(settings.name_max_len), unique=True, index=True
+    )
 
     def __repr__(self) -> str:
-        return (
-            f"\nid: {self.id}"
-            f"\ntitle: {self.title}"
-            f"\ndescription: {self.description}\n"
-        )
+        return f"\nid: {self.id}" f"\nname: {self.name}\n"
+
+
+class Vacancy(GenericModel):
+    pass
+
+
+class City(GenericModel):
+    pass
