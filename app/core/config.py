@@ -18,6 +18,7 @@ class Settings(BaseSettings):
     app_title: str = f"App title {DEFAULT_STR}"
     app_description: str = f"App description {DEFAULT_STR}"
     secret_key: SecretStr = f"Secret key {DEFAULT_STR}"
+    name_max_len: int = 256
 
     # DB settings
     postgres_user: str  # = "postgres"
