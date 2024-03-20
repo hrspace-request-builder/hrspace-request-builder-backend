@@ -172,3 +172,4 @@ cython_debug/
 fastapi.db
 test.db
 =GARB=
+raw_files

@@ -5,22 +5,30 @@ from app.core.dependencies import async_session
 from app.models.models import Vacancy
 from app.schemas import schemas
 
-from .responses import get_400, get_404
+SUM_ALL_VACANCY_NAMES = "ALL_VACANCY_NAMES"
+SUM_VACANCY_NAME_DATA = "Data for particular vacancy name"
 
-SUM_ALL_ITEMS = "ALL_ITEMS"
-
-router = APIRouter(prefix=f"{settings.URL_PREFIX}items", tags=["Items"])
+router = APIRouter(prefix=f"{settings.URL_PREFIX}first_page", tags=["First_page"])
 
 
 @router.get(
-    "/",
-    response_model=list[schemas.VacancyOut],
-    responses={**get_400("Item"), **get_404("Item")},
-    summary=SUM_ALL_ITEMS,
-    description=(f"{settings.ALL_USERS} {SUM_ALL_ITEMS}"),
+    "/vacancy_names",
+    response_model=list[schemas.VacancyNamesOut],
+    summary=SUM_ALL_VACANCY_NAMES,
+    description=(f"{settings.ALL_USERS} {SUM_ALL_VACANCY_NAMES}"),
 )
 async def get_all_vacancies(session: async_session) -> list:
     from sqlalchemy import select
 
     stmt = select(Vacancy)
     return await session.scalars(stmt)
+
+
+@router.get(
+    "/data/",
+    # response_model=list[schemas.VacancyNamesOut],
+    summary=SUM_ALL_VACANCY_NAMES,
+    description=(f"{settings.ALL_USERS} {SUM_ALL_VACANCY_NAMES}"),
+)
+async def read_data(vacancy_name_id: int = 0):
+    return None
