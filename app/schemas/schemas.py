@@ -1,4 +1,5 @@
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
+from typing import List
 
 from .fields import name_field
 
@@ -49,3 +50,16 @@ class Data(BaseModel):
     responsibilities: list[Responsibilities]
     requirements: list[Requirements]
     conditions: list[Conditions]
+
+class VacancyOut(BaseModel):
+    id: int
+    conditions_description: str
+    hr_salary_model: int
+    hr_salary: int
+    employee_to_search: int
+    number_of_recruiters: int
+    when_work: str
+    what_need: str
+    additional_tasks: List[str]
+    special_requirements: str
+    show_info: bool = False
