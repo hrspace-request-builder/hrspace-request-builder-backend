@@ -27,7 +27,9 @@ class Settings(BaseSettings):
     db_port: str  # = "5432"
     postgres_db: str  # = "postgres"
 
-    #vacancy settings
+    # vacancy settings
+    decimal_precision = 10
+    decimal_scale = 2
     description_max_len: int = 512
     number_of_recruiters: list = [1, 2, 3]
     hr_salary_model: list = [0, 1, 2]
