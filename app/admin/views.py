@@ -1,6 +1,6 @@
 from starlette_admin.contrib.sqla import ModelView
 
-from app.models.models import City, Vacancy
+from app.models.models import City, Specialization, VacancyName
 
 
 class GenericView(ModelView):
@@ -12,6 +12,11 @@ class CityView(GenericView):
     name = "Города"
 
 
+class SpecializationView(GenericView):
+    model = Specialization
+    name = "Специальность"
+
+
 class VacancyView(GenericView):
-    model = Vacancy
+    model = VacancyName
     name = "Названия вакансий"
