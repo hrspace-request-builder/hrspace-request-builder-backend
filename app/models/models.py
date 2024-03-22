@@ -1,8 +1,10 @@
 from decimal import Decimal
 from sqlalchemy import (
-    ARRAY, Boolean, Integer, String
+    ARRAY, Boolean, Integer, String, ForeignKey
 )
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import (
+    Mapped, mapped_column, relationship
+)
 
 from app.core.config import settings
 
@@ -21,6 +23,13 @@ class GenericModel(Base):
 
 
 class Vacancy(GenericModel):
+    __tablename__ = "vacancies"
+    specialization_id: Mapped[int] = mapped_column(
+        ForeignKey("specializations.id")
+    )
+    specialization: Mapped["Specialization"] = relationship(
+        "Specialization"
+    )
     salary_from: Mapped[Decimal] = mapped_column(
         Decimal(
             settings.decimal_precision,
@@ -32,6 +41,28 @@ class Vacancy(GenericModel):
             settings.decimal_precision,
             settings.decimal_scale
         )
+    )
+    grade: Mapped[str] =  mapped_column(
+        String(settings.grade_max_len))
+    experience: Mapped[str] = mapped_column(
+        String(settings.experience_max_len))
+    city_id: Mapped[int] = mapped_column(ForeignKey("cities.id"))
+    city: Mapped["City"] = relationship("City")
+    work_type: Mapped[list] = mapped_column(ARRAY(String))
+    employment: Mapped[str] = mapped_column(
+        String(settings.employment_max_len))
+    registration_type: Mapped[str] = mapped_column(
+        String(settings.reg_type_max_len))
+    responsibilities: Mapped[list["Responsibility"]] = relationship(
+        "Responsibility", secondary="vacancy_responsibilities", backref="vacancies"
+    )
+    responsibilities_description: Mapped[str] = mapped_column(String)
+    requirements: Mapped[list["Requirement"]] = relationship(
+        "Requirement", secondary="vacancy_requirements", backref="vacancies"
+    )
+    requirements_description: Mapped[str] = mapped_column(String)
+    conditions: Mapped[list["Condition"]] = relationship(
+        "Condition", secondary="vacancy_conditions", backref="vacancies"
     )
     conditions_description: Mapped[str] = mapped_column(
         String(settings.description_max_len)
@@ -58,8 +89,20 @@ class Vacancy(GenericModel):
 
     def __repr__(self) -> str:
         return (
+            f"\nspecialization: {self.specialization}"
             f"\nsalary_from: {self.salary_from}"
             f"\nsalary_to: {self.salary_to}"
+            f"\ngrade: {self.grade}"
+            f"\nexperience: {self.experience}"
+            f"\ncity: {self.city}"
+            f"\nwork_type: {self.work_type}"
+            f"\nemployment: {self.employment}"
+            f"\nregistration_type: {self.registration_type}"
+            f"\nresponsibilities: {self.responsibilities}"
+            f"\nresponsibilities_description: {self.responsibilities_description}"
+            f"\nrequirements: {self.requirements}"
+            f"\nrequirements_description: {self.requirements_description}"
+            f"\nconditions: {self.conditions}"
             f"\nconditions_description: {self.conditions_description}"
             f"\nhr_salary_model: {self.hr_salary_model}"
             f"\nhr_salary: {self.hr_salary}"
