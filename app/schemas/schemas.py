@@ -3,7 +3,6 @@ from pydantic import (
     BaseModel, ConfigDict,
     Field, field_validator
 )
-from typing import List, Optional
 
 from app.core.config import settings
 from .fields import name_field
@@ -59,21 +58,21 @@ class Data(BaseModel):
 
 class VacancyOut(BaseModel):
     id: int
-    vacancy_name: Optional[str] 
-    specialization: Optional[str]
+    vacancy_name: str | None
+    specialization: str | None
     salary_from: Decimal = Field(ge=0)
     salary_to: Decimal = Field(ge=0)
     grade: str  
     experience: str  
     city: str  
-    work_type: List[str]
+    work_type: list[str]
     employment: str 
     registration_type: str  
-    responsibilities: List[str]  
+    responsibilities: list[str]  
     responsibilities_description: str  
-    requirements: List[str]  
+    requirements: list[str]  
     requirements_description: str  
-    conditions: List[str]
+    conditions: list[str]
     conditions_description: str
     hr_salary_model: int
     hr_salary: Decimal = Field(ge=0)
@@ -81,7 +80,7 @@ class VacancyOut(BaseModel):
     number_of_recruiters: int
     when_work: str
     what_need: str
-    additional_tasks: List[str]
+    additional_tasks: list[str]
     special_requirements: str
     show_info: bool = False
 
