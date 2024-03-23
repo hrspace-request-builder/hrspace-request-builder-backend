@@ -3,7 +3,7 @@ from pydantic import (
     BaseModel, ConfigDict,
     Field, field_validator
 )
-from typing import List
+from typing import List, Optional
 
 from app.core.config import settings
 from .fields import name_field
@@ -59,14 +59,14 @@ class Data(BaseModel):
 
 class VacancyOut(BaseModel):
     id: int
-    # vacancy_name: str  
-    #specialization: str
+    vacancy_name: Optional[str] 
+    specialization: Optional[str]
     salary_from: Decimal = Field(ge=0)
     salary_to: Decimal = Field(ge=0)
     grade: str  
     experience: str  
     city: str  
-    work_type: List[str] 
+    work_type: List[str]
     employment: str 
     registration_type: str  
     responsibilities: List[str]  

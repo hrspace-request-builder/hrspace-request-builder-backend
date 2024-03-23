@@ -24,6 +24,9 @@ class GenericModel(Base):
 
 class Vacancy(GenericModel):
     __tablename__ = "vacancies"
+    vacancy_name_id: Mapped[int] = mapped_column(
+         ForeignKey("vacancy_name.id"))
+    vacancy_name: Mapped["VacancyName"] = relationship("VacancyName")
     specialization_id: Mapped[int] = mapped_column(
         ForeignKey("specializations.id")
     )
@@ -54,15 +57,22 @@ class Vacancy(GenericModel):
     registration_type: Mapped[str] = mapped_column(
         String(settings.reg_type_max_len))
     responsibilities: Mapped[list["Responsibility"]] = relationship(
-        "Responsibility", secondary="vacancy_responsibilities", backref="vacancies"
+        "Responsibility", secondary="vacancy_responsibilities",
+        backref="vacancies"
     )
-    responsibilities_description: Mapped[str] = mapped_column(String)
+    responsibilities_description: Mapped[str] = mapped_column(
+        String(settings.description_max_len)
+    )
     requirements: Mapped[list["Requirement"]] = relationship(
-        "Requirement", secondary="vacancy_requirements", backref="vacancies"
+        "Requirement", secondary="vacancy_requirements",
+        backref="vacancies"
     )
-    requirements_description: Mapped[str] = mapped_column(String)
+    requirements_description: Mapped[str] = mapped_column(
+        String(settings.description_max_len)
+    )
     conditions: Mapped[list["Condition"]] = relationship(
-        "Condition", secondary="vacancy_conditions", backref="vacancies"
+        "Condition", secondary="vacancy_conditions",
+        backref="vacancies"
     )
     conditions_description: Mapped[str] = mapped_column(
         String(settings.description_max_len)
@@ -89,6 +99,7 @@ class Vacancy(GenericModel):
 
     def __repr__(self) -> str:
         return (
+            f"\nvacancy_name: {self.vacancy_name}"
             f"\nspecialization: {self.specialization}"
             f"\nsalary_from: {self.salary_from}"
             f"\nsalary_to: {self.salary_to}"
