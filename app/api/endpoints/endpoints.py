@@ -53,14 +53,14 @@ async def get_all_categories(session: async_session):
 
 
 @router.get(
-    "/specializations/{spec_id}",
+    "/specializations/{vacancy_name_id}",
     response_model=schemas.FullSpecialization,
     responses={**responses.get_404("menu")},
     summary=SUM_SPECIALIZATION,
     description=(f"{settings.ALL_USERS} {SUM_SPECIALIZATION}"),
 )
-async def get_spec(spec_id: int, session: async_session):
-    return await crud.get_or_404(session, models.Specialization, spec_id)
+async def get_spec(vacancy_name_id: int, session: async_session):
+    return await crud.get_or_404(session, models.Specialization, vacancy_name_id)
 
 
 @router.get(

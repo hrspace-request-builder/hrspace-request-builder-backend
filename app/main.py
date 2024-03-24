@@ -3,6 +3,7 @@ from typing import Any, AsyncGenerator
 
 from fastapi import FastAPI
 
+from app.admin import admin
 from app.api.routers import main_router
 from app.core.config import settings
 from app.core.dependencies import engine
@@ -24,4 +25,4 @@ app = FastAPI(
 )
 
 app.include_router(main_router)
-# admin.mount_to(app)
+admin.mount_to(app)
