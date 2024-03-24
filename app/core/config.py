@@ -33,26 +33,26 @@ class Settings(BaseSettings):
         "middle", "junior",
         "senior", "lead"
     ]
-    experience_levels = [
+    experience_levels: list = [
          "1-3 года", "неважно",
          "нет опыта", "3-6 лет"
     ]
-    work_types = [
+    work_types: list = [
         "удаленная работа", "офис", "гибрид"
     ]
-    employment_types = [
+    employment_types: list = [
         "частичная", "полная занятость",
         "посменно", "другое"
     ]
-    registration_types = [
+    registration_types: list = [
         "ИП", "ТК РФ",
         "самозанятость", "ГПХ"
     ]
     experience_max_len: int = 9
     employment_max_len: int = 16
     reg_type_max_len: int = 13
-    decimal_precision = 10
-    decimal_scale = 2
+    decimal_precision: int = 10
+    decimal_scale: int = 2
     description_max_len: int = 512
     number_of_recruiters: list = [1, 2, 3]
     hr_salary_model: list = [0, 1, 2]
