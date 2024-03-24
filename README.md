@@ -1,7 +1,7 @@
 # hrspace-request-builder-backend
 [![CI/CD](https://github.com/hrspace-request-builder/hrspace-request-builder-backend/actions/workflows/main.yml/badge.svg)](https://github.com/hrspace-request-builder/hrspace-request-builder-backend/actions/workflows/main.yml)
 
-Проект развернут на удаленном сервере по адресу  http://185.221.162.231:
+Проект развернут на удаленном сервере по адресу  http://185.221.162.231
   - админ панель доступна по адресу http://185.221.162.231:81/admin
   - Swagger доступен по адресу http://185.221.162.231:81/docs
   - Redoc доступен по адресу http://185.221.162.231:81/redoc
