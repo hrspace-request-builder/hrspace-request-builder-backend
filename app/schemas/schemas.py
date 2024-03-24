@@ -69,10 +69,9 @@ class FullResponse(BaseModel):
     conditions: list[Condition]
 
 
-class VacancyOut(BaseModel):
-    id: int
-    vacancy_name: str | None
-    specialization: str | None
+class VacancyOut(Base):
+    name: str  # | None
+    specialization: str  # | None
     salary_from: Decimal = Field(ge=0)
     salary_to: Decimal = Field(ge=0)
     grade: str
@@ -99,8 +98,8 @@ class VacancyOut(BaseModel):
 
     @field_validator("salary_to")
     @classmethod
-    def validate_salary_range(self, value, field):
-        if value < self.salary_from:
+    def validate_salary_range(cls, value):
+        if value < cls.salary_from:
             raise ValueError("salary_to must be greater than or equal to salary_from")
         return value
 
@@ -156,13 +155,13 @@ class VacancyOut(BaseModel):
     @field_validator("when_work")
     @classmethod
     def validate_when_work(cls, value):
-        if value not in settings.when_work_options:
+        if value not in settings.vacancy_when_work_options:
             raise ValueError("Invalid when_work option")
         return value
 
     @field_validator("what_need")
     @classmethod
     def validate_what_need(cls, value):
-        if value not in settings.what_need_options:
+        if value not in settings.vacancy_what_need_options:
             raise ValueError("Invalid what_need option")
         return value

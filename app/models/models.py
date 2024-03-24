@@ -1,4 +1,6 @@
-from sqlalchemy import ARRAY, Boolean, ForeignKey, Numeric, String
+from decimal import Decimal
+
+from sqlalchemy import ARRAY, Boolean, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.config import settings
@@ -16,26 +18,26 @@ class GenericModel(Base):
 
 
 class Vacancy(GenericModel):
-    __tablename__ = "vacancies"
-    vacancy_name: Mapped[str] = mapped_column(String(settings.name_max_len))
+    # __tablename__ = "vacancies"
+    # vacancy_name: Mapped[str] = mapped_column(String(settings.name_max_len))
     specialization_id: Mapped[int] = mapped_column(ForeignKey("specialization.id"))
     specialization: Mapped["Specialization"] = relationship()  # "Specialization")
-    salary_from: Mapped[Numeric]
+    salary_from: Mapped[Decimal]
     # mapped_column(Decimal(settings.decimal_precision, settings.decimal_scale))
-    salary_to: Mapped[Numeric]
+    salary_to: Mapped[Decimal]
     # mapped_column(Decimal(settings.decimal_precision, settings.decimal_scale))
     grade: Mapped[str] = mapped_column(String(settings.grade_max_len))
     experience: Mapped[str] = mapped_column(String(settings.experience_max_len))
-    city_id: Mapped[int] = mapped_column(ForeignKey("cities.id"))
+    city_id: Mapped[int] = mapped_column(ForeignKey("city.id"))
     city: Mapped["City"] = relationship()  # "City")
     work_type: Mapped[list] = mapped_column(ARRAY(String))
     employment: Mapped[str] = mapped_column(String(settings.employment_max_len))
     registration_type: Mapped[str] = mapped_column(String(settings.reg_type_max_len))
-    responsibilities: Mapped[list["Responsibility"]] = relationship(
+    """responsibilities: Mapped[list["Responsibility"]] = relationship(
         # "Responsibility",
-        secondary="vacancy_responsibilities",
-        back_populates="vacancies",
-    )
+    #    secondary="vacancy_responsibilities",
+    #    back_populates="vacancies",
+    #)
     responsibilities_description: Mapped[str] = mapped_column(
         String(settings.description_max_len)
     )
@@ -50,9 +52,9 @@ class Vacancy(GenericModel):
     )
     conditions_description: Mapped[str] = mapped_column(
         String(settings.description_max_len)
-    )
-    hr_salary_model: Mapped[Numeric]  # = mapped_column(Integer)
-    hr_salary: Mapped[Numeric]
+    )"""
+    hr_salary_model: Mapped[int]  # = mapped_column(Integer)
+    hr_salary: Mapped[Decimal]
     # mapped_column(Decimal(settings.decimal_precision, settings.decimal_scale))
     employee_to_search: Mapped[int]  # = mapped_column(Integer)
     number_of_recruiters: Mapped[int]  # = mapped_column(Integer)

@@ -1,7 +1,8 @@
-# from decimal import Decimal
+from decimal import Decimal
 
 
-def get_salary(city_id: int) -> dict[str, float]:  # type: ignore [dict-item]
+# type: ignore [dict-item]
+def get_salary(city_id: int) -> dict[str, Decimal]:
     # TODO: calculate salary min/max as per city
     # city = crud.get_or_404(session, City)
-    return {"min": 1000.00, "max": 2000.00}
+    return {"min": Decimal(1000.00), "max": Decimal(2000.00)}
