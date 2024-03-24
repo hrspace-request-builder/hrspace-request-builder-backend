@@ -28,15 +28,19 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    ports:
-      - 81:8000
+    expose:
+      - 8000
+    #ports:
+    #  - 81:8000
     env_file:
       - ../.env
 
   frontend:
     image: alexpro1972/hrspace_frontend
-    expose:
-      - 3000
+    #expose:
+    #  - 3000
+    ports:
+      - 81:3000
 
   nginx:
     image: nginx:1.21.3-alpine
