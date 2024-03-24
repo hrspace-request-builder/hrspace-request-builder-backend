@@ -27,6 +27,52 @@ class Settings(BaseSettings):
     db_port: str  # = "5432"
     postgres_db: str  # = "postgres"
 
+    # vacancy settings
+    grade_max_len: int = 6
+    grades: list = [
+        "middle", "junior",
+        "senior", "lead"
+    ]
+    experience_levels = [
+         "1-3 года", "неважно",
+         "нет опыта", "3-6 лет"
+    ]
+    work_types = [
+        "удаленная работа", "офис", "гибрид"
+    ]
+    employment_types = [
+        "частичная", "полная занятость",
+        "посменно", "другое"
+    ]
+    registration_types = [
+        "ИП", "ТК РФ",
+        "самозанятость", "ГПХ"
+    ]
+    experience_max_len: int = 9
+    employment_max_len: int = 16
+    reg_type_max_len: int = 13
+    decimal_precision = 10
+    decimal_scale = 2
+    description_max_len: int = 512
+    number_of_recruiters: list = [1, 2, 3]
+    hr_salary_model: list = [0, 1, 2]
+    when_work_max_len: int = 18
+    what_need_max_len: int = 19
+    vacancy_when_work_options: list = [
+        "Срочно",
+        "Не очень срочно",
+        "Времени достаточно"
+    ]
+    vacancy_additional_tasks: list = [
+        "тестирование кандидатов",
+        "предварительное собеседование",
+        "подготовка рекомендаций по онбордингу"
+    ]
+    vacancy_what_need_options: list = [
+        "резюме", "резюме и результаты"
+    ]
+    requirements_max_len: int = 2000
+
     @property
     def database_url(self) -> str:
         return (
