@@ -57,6 +57,7 @@ class Settings(BaseSettings):
     vacancy_additional_tasks: tuple[str, ...] = (
         "тестирование кандидатов",
         "предварительное собеседование",
+        "формирование отчёта по поиску",
         "подготовка рекомендаций по онбордингу",
     )
     vacancy_what_need_options: tuple[str, ...] = ("резюме", "резюме и результаты")

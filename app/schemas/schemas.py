@@ -4,7 +4,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from app.core.config import settings
 
-from .fields import name_field
+from .fields import field_examples, name_field
 
 
 class Salary(BaseModel):
@@ -69,39 +69,37 @@ class FullResponse(BaseModel):
     conditions: list[Condition]
 
 
-class VacancyIn(Base):
-    name: str  # | None
-    specialization: str  # | None
-    salary_from: Decimal = Field(ge=0)
-    salary_to: Decimal = Field(ge=0)
-    grade: str
-    experience: str
-    city: str
-    work_type: list[str]
-    employment: str
-    registration_type: str
-    responsibilities: list[str]
-    responsibilities_description: str
-    requirements: list[str]
-    requirements_description: str
-    conditions: list[str]
-    conditions_description: str
-    hr_salary_model: int
-    hr_salary: Decimal = Field(ge=0)
-    employee_to_search: int
-    number_of_recruiters: int
-    when_work: str
-    what_need: str
-    additional_tasks: list[str]
-    special_requirements: str
-    show_info: bool = False
-
-    @field_validator("salary_to")
-    @classmethod
-    def validate_salary_range(cls, value):
-        if value < cls.salary_from:
-            raise ValueError("salary_to must be greater than or equal to salary_from")
-        return value
+class VacancyIn(BaseModel):
+    name: str = name_field("Название вакансии")
+    # relation id
+    specialization_id: int = field_examples(1)
+    city_id: int = field_examples(1)
+    # Numeric auto validation
+    salary_from: Decimal = Field(ge=0, examples=[1000.00])
+    salary_to: Decimal = Field(ge=0, examples=[2000.00])
+    hr_salary: Decimal = Field(ge=0, examples=[1000.00])
+    hr_salary_model: int = Field(ge=1, le=3, examples=[2])
+    employee_to_search: int = Field(ge=1, examples=[2])
+    number_of_recruiters: int = Field(ge=1, le=3, examples=[2])
+    # Radio buttons - single value
+    grade: str = name_field("middle")
+    experience: str = name_field("неважно")
+    employment: str = name_field("полная занятость")
+    registration_type: str = name_field("самозанятость")
+    when_work: str = name_field("Срочно")
+    what_need: str = name_field("резюме")
+    # Checkboxes - multiple values
+    work_types: list[str] = field_examples(settings.work_types)
+    responsibilities_ids: list[int] = field_examples([1, 2, 3])
+    requirements_ids: list[int] = field_examples([1, 2, 3])
+    conditions_ids: list[int] = field_examples([1, 2, 3])
+    additional_tasks: list[str] = field_examples(settings.vacancy_additional_tasks)
+    # Произвольный текст
+    responsibilities_description: str = name_field("Обязанности свое описание")
+    requirements_description: str = name_field("Требования свое описание")
+    conditions_description: str = name_field("Условия свое описание")
+    special_requirements: str = name_field("Специальные требования свое описание")
+    show_info: bool = Field(default=False)
 
     @field_validator("grade")
     @classmethod
@@ -115,13 +113,6 @@ class VacancyIn(Base):
     def validate_experience(cls, value):
         if value not in settings.experience_levels:
             raise ValueError("Invalid experience")
-        return value
-
-    @field_validator("work_type")
-    @classmethod
-    def validate_work_type(cls, value):
-        if value not in settings.work_types:
-            raise ValueError("Invalid work_type")
         return value
 
     @field_validator("employment")
@@ -138,20 +129,6 @@ class VacancyIn(Base):
             raise ValueError("Invalid registration type")
         return value
 
-    @field_validator("number_of_recruiters")
-    @classmethod
-    def validate_number_of_recruiters(cls, value):
-        if value not in settings.number_of_recruiters:
-            raise ValueError("Invalid number of recruiters")
-        return value
-
-    @field_validator("hr_salary_model")
-    @classmethod
-    def validate_hr_salary_model(cls, value):
-        if value not in settings.hr_salary_model:
-            raise ValueError("Invalid hr_salary_model")
-        return value
-
     @field_validator("when_work")
     @classmethod
     def validate_when_work(cls, value):
@@ -165,3 +142,24 @@ class VacancyIn(Base):
         if value not in settings.vacancy_what_need_options:
             raise ValueError("Invalid what_need option")
         return value
+
+    """ @field_validator("work_type")
+    @classmethod
+    def validate_work_type(cls, value):
+        if value not in settings.work_types:
+            raise ValueError("Invalid work_type")
+        return value
+
+     @field_validator("number_of_recruiters")
+    @classmethod
+    def validate_number_of_recruiters(cls, value):
+        if value not in settings.number_of_recruiters:
+            raise ValueError("Invalid number of recruiters")
+        return value
+
+    @field_validator("hr_salary_model")
+    @classmethod
+    def validate_hr_salary_model(cls, value):
+        if value not in settings.hr_salary_model:
+            raise ValueError("Invalid hr_salary_model")
+        return value """
