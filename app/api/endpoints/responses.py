@@ -4,14 +4,18 @@ from pydantic import BaseModel
 
 
 def get_400(name: str) -> dict[int, dict[str, Any]]:
-    class Message(BaseModel):
-        detail: str = f"{name} already exists"
+    bad_request_msg = "already exists"
 
-    return {400: {"model": Message, "description": "The item already exists"}}
+    class Message(BaseModel):
+        detail: str = f"{name} {bad_request_msg}"
+
+    return {400: {"model": Message, "description": f"The item {bad_request_msg}"}}
 
 
 def get_404(name: str) -> dict[int, dict[str, Any]]:
-    class Message(BaseModel):
-        detail: str = f"{name} not found"
+    not_found_msg = "was not found"
 
-    return {404: {"model": Message, "description": "The item was not found"}}
+    class Message(BaseModel):
+        detail: str = f"{name} {not_found_msg}"
+
+    return {404: {"model": Message, f"{not_found_msg}": ""}}

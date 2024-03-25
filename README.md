@@ -1,10 +1,39 @@
 # hrspace-request-builder-backend
 [![CI/CD](https://github.com/hrspace-request-builder/hrspace-request-builder-backend/actions/workflows/main.yml/badge.svg)](https://github.com/hrspace-request-builder/hrspace-request-builder-backend/actions/workflows/main.yml)
 
-Проект развернут на удаленном сервере по адресу  http://185.221.162.231/hrspace:
+Проект развернут на удаленном сервере по адресу  http://185.221.162.231:81
   - админ панель доступна по адресу http://185.221.162.231/admin
   - Swagger доступен по адресу http://185.221.162.231/docs
   - Redoc доступен по адресу http://185.221.162.231/redoc
+
+<br>
+
+## Оглавление
+- [Технологии](#технологии)
+- [Описание работы](#описание-работы)
+- [Установка приложения](#установка-приложения)
+- [Запуск приложения](#запуск-приложения)
+- [Удаление приложения](#удаление-приложения)
+- [Авторы](#авторы)
+
+<br>
+
+## Технологии
+<details><summary>Подробнее</summary><br>
+
+[![Python](https://img.shields.io/badge/python-3.12-blue?logo=python)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/-FastAPI-464646?logo=fastapi)](https://fastapi.tiangolo.com/)
+[![Pydantic](https://img.shields.io/badge/-Pydantic-464646?logo=Pydantic)](https://docs.pydantic.dev/)
+[![PostgreSQL](https://img.shields.io/badge/-PostgreSQL-464646?logo=PostgreSQL)](https://www.postgresql.org/)
+[![asyncpg](https://img.shields.io/badge/-asyncpg-464646?logo=PostgreSQL)](https://pypi.org/project/asyncpg/)
+[![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-2.0-blue?logo=sqlalchemy)](https://www.sqlalchemy.org/)
+[![Uvicorn](https://img.shields.io/badge/-Uvicorn-464646?logo=Uvicorn)](https://www.uvicorn.org/)
+[![docker_compose](https://img.shields.io/badge/-Docker%20Compose-464646?logo=docker)](https://docs.docker.com/compose/)
+[![pre-commit](https://img.shields.io/badge/-pre--commit-464646?logo=pre-commit)](https://pre-commit.com/)
+
+[⬆️Оглавление](#оглавление)
+
+</details>
 
 <br>
 
@@ -30,6 +59,8 @@ cp env_example .env
 nano .env
 ```
 
+[⬆️Оглавление](#оглавление)
+
 <br>
 
 ## Запуск приложения:
@@ -38,7 +69,7 @@ nano .env
 ```bash
 docker compose -f docker/docker-compose.yml --env-file .env up -d --build
 ```
-  Проект будет развернут в docker-контейнерах по адресу http://localhost/hrspace
+  Проект будет развернут в docker-контейнерах по адресу http://localhost:81
 
   Администрирование приложения может быть осуществлено:
   - через Swagger доступный по адресу http://localhost/docs
@@ -60,6 +91,8 @@ docker compose -f docker/docker-compose.yml --env-file .env down
 docker compose -f docker/docker-compose.yml --env-file .env down -v
 ```
 
+[⬆️Оглавление](#оглавление)
+
 <br>
 
 ## Удаление приложения:
@@ -67,3 +100,14 @@ docker compose -f docker/docker-compose.yml --env-file .env down -v
 ```bash
 cd .. && rm -fr hrspace-request-builder-backend
 ```
+
+[⬆️Оглавление](#оглавление)
+
+<br>
+
+## Авторы:
+- [Aleksei Proskuriakov](https://github.com/alexpro2022)
+- [Bair Erendzhenov](https://github.com/ErendzhenovBair)
+- [Stanislav Zatushevskii](https://github.com/stas-zatushevskii)
+
+[⬆️В начало](#hrspace-request-builder-backend)

@@ -1,3 +1,5 @@
+from typing import Any
+
 from sqlalchemy import MetaData
 from sqlalchemy.orm import DeclarativeBase, Mapped, declared_attr, mapped_column
 
@@ -18,6 +20,9 @@ class Base(DeclarativeBase):
         return cls.__name__.lower()
 
     id: Mapped[int] = mapped_column(primary_key=True)
+
+    def asdict(self) -> dict[str, Any]:
+        return {c.name: getattr(self, c.name, None) for c in self.__table__.columns}
 
     def __repr__(self) -> str:
         return f"\nid: {self.id}\n"
