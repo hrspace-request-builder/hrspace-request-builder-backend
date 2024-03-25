@@ -60,7 +60,10 @@ class Settings(BaseSettings):
         "формирование отчёта по поиску",
         "подготовка рекомендаций по онбордингу",
     )
-    vacancy_what_need_options: tuple[str, ...] = ("резюме", "резюме и результаты")
+    vacancy_what_need_options: tuple[str, ...] = (
+        "Только резюме",
+        "Резюме + результаты собеседования",
+    )
     requirements_max_len: int = 2000
 
     @property
