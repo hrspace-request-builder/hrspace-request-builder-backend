@@ -69,7 +69,7 @@ class FullResponse(BaseModel):
     conditions: list[Condition]
 
 
-class VacancyOut(Base):
+class VacancyIn(Base):
     name: str  # | None
     specialization: str  # | None
     salary_from: Decimal = Field(ge=0)

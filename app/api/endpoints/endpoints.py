@@ -9,15 +9,16 @@ from app.schemas import schemas
 
 from . import responses
 
-SUM_ALL_VACANCY_NAMES = "Предлагаемые названия вакансий"
-SUM_VACANCY_NAME_DATA = "Data for particular vacancy name"
 SUM_CITIES = "Города России"
 SUM_CATEGORIES = "Сферы деятельности (и их профессии)"
 SUM_CONDITIONS = "Условия труда"
-SUM_SPECIALIZATION = "Выбранная профессия (полный формат)"
+SUM_SPECIALIZATION = "Выбранная специализация (полный формат)"
 SUM_SPECIALIZATIONS = "Список профессий (сокращенный формат)"
 SUM_REQUIREMENTS = "Общий список требований"
 SUM_RESPONSIBILITIES = "Общий список обязанностей"
+SUM_ALL_VACANCY_NAMES = "Предлагаемые названия вакансий"
+SUM_VACANCY_NAME_DATA = "Данные для полей заявки"
+SUM_VACANCY = "Данные заполненной заявки"
 
 router = APIRouter(prefix=f"{settings.URL_PREFIX}hrspace", tags=["First_page"])
 
@@ -55,7 +56,7 @@ async def get_all_categories(session: async_session):
 @router.get(
     "/specializations/{vacancy_name_id}",
     response_model=schemas.FullSpecialization,
-    responses={**responses.get_404("menu")},
+    responses={**responses.get_404("Specialization")},
     summary=SUM_SPECIALIZATION,
     description=(f"{settings.ALL_USERS} {SUM_SPECIALIZATION}"),
 )
@@ -65,12 +66,24 @@ async def get_spec(vacancy_name_id: int, session: async_session):
 
 @router.get(
     "/data/",
-    # response_model=schemas.FullResponse,
+    responses={**responses.get_404("City or specialization")},
     summary=SUM_VACANCY_NAME_DATA,
     description=(f"{settings.ALL_USERS} {SUM_VACANCY_NAME_DATA}"),
 )
 async def get_data(vacancy_name_id: int, city_id: int, session: async_session):
     spec = await crud.get_or_404(session, models.Specialization, vacancy_name_id)
-    salary = get_salary(city_id)
+    salary = await get_salary(session, city_id)
     conditions = [c.asdict() for c in await crud.get_all(session, models.Condition)]
     return {**spec.__dict__, **{"salary": salary, "conditions": conditions}}
+
+
+@router.post(
+    "/vacancy",
+    status_code=201,
+    # response_model=schemas.VacancyOut,
+    # responses={**responses.get_400("Object")},
+    summary=SUM_VACANCY,
+    description=(f"{settings.ALL_USERS} {SUM_VACANCY}"),
+)
+async def post_vacancy(payload: schemas.VacancyIn, session: async_session):
+    pass
