@@ -1,7 +1,7 @@
 # hrspace-request-builder-backend
 [![CI/CD](https://github.com/hrspace-request-builder/hrspace-request-builder-backend/actions/workflows/main.yml/badge.svg)](https://github.com/hrspace-request-builder/hrspace-request-builder-backend/actions/workflows/main.yml)
 
-Проект развернут на удаленном сервере по адресу  http://185.221.162.231/hrspace:
+Проект развернут на удаленном сервере по адресу  http://185.221.162.231:81
   - админ панель доступна по адресу http://185.221.162.231/admin
   - Swagger доступен по адресу http://185.221.162.231/docs
   - Redoc доступен по адресу http://185.221.162.231/redoc
@@ -38,7 +38,7 @@ nano .env
 ```bash
 docker compose -f docker/docker-compose.yml --env-file .env up -d --build
 ```
-  Проект будет развернут в docker-контейнерах по адресу http://localhost/hrspace
+  Проект будет развернут в docker-контейнерах по адресу http://localhost:81
 
   Администрирование приложения может быть осуществлено:
   - через Swagger доступный по адресу http://localhost/docs

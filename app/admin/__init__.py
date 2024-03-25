@@ -1,7 +1,6 @@
 from starlette_admin.contrib.sqla import Admin
-from .views import City, CityView, Vacancy, VacancyView
 from app.core.dependencies import engine
-
+from .views import City, CityView
 
 admin = Admin(
     engine,
@@ -9,4 +8,4 @@ admin = Admin(
 )
 
 admin.add_view(CityView(City))
-admin.add_view(VacancyView(Vacancy))
+# admin.add_view(VacancyView(VacancyName))
