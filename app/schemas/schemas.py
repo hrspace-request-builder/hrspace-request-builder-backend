@@ -87,7 +87,7 @@ class VacancyIn(BaseModel):
     employment: str = name_field("полная занятость")
     registration_type: str = name_field("самозанятость")
     when_work: str = name_field("Срочно")
-    what_need: str = name_field("резюме")
+    what_need: str = name_field("Резюме + результаты собеседования")
     # Checkboxes - multiple values
     work_types: list[str] = field_examples(settings.work_types)
     responsibilities_ids: list[int] = field_examples([1, 2, 3])
@@ -143,23 +143,6 @@ class VacancyIn(BaseModel):
             raise ValueError("Invalid what_need option")
         return value
 
-    """ @field_validator("work_type")
-    @classmethod
-    def validate_work_type(cls, value):
-        if value not in settings.work_types:
-            raise ValueError("Invalid work_type")
-        return value
 
-     @field_validator("number_of_recruiters")
-    @classmethod
-    def validate_number_of_recruiters(cls, value):
-        if value not in settings.number_of_recruiters:
-            raise ValueError("Invalid number of recruiters")
-        return value
-
-    @field_validator("hr_salary_model")
-    @classmethod
-    def validate_hr_salary_model(cls, value):
-        if value not in settings.hr_salary_model:
-            raise ValueError("Invalid hr_salary_model")
-        return value """
+class VacancyOut(Base, VacancyIn):
+    pass

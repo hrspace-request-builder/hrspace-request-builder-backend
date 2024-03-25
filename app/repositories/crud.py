@@ -18,3 +18,11 @@ async def get_all(session: AsyncSession, model):
 
 async def get_or_404(session: AsyncSession, model, id: int):
     return await get(session, model, exception=True, id=id)
+
+
+async def create(session: AsyncSession, model, **kwargs):
+    obj = model(**kwargs)
+    session.add(obj)
+    await session.commit()
+    await session.refresh(obj)
+    return obj

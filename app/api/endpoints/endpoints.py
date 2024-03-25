@@ -80,10 +80,9 @@ async def get_data(vacancy_name_id: int, city_id: int, session: async_session):
 @router.post(
     "/vacancy",
     status_code=201,
-    # response_model=schemas.VacancyOut,
-    # responses={**responses.get_400("Object")},
+    response_model=schemas.VacancyOut,
     summary=SUM_VACANCY,
     description=(f"{settings.ALL_USERS} {SUM_VACANCY}"),
 )
-async def post_vacancy(payload: schemas.VacancyIn, session: async_session):
-    pass
+async def create_vacancy(payload: schemas.VacancyIn, session: async_session):
+    return await crud.create(session, models.Vacancy, **payload.model_dump())
