@@ -1,5 +1,5 @@
 from fastapi import HTTPException, status
-from sqlalchemy import insert, select
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 
@@ -21,21 +21,8 @@ async def get_or_404(session: AsyncSession, model, id: int):
 
 
 async def create(session: AsyncSession, model, **kwargs):
-    return await session.execute(insert(model).values(**kwargs))
-
-
-'''
-    # obj = model(**kwargs)
-
-    async def _save(self, obj: ModelType) -> ModelType:
-        """Raises `BAD_REQUEST` exception if object already exists in DB. """
-        self.session.add(obj)
-        try:
-            await self.session.commit()
-        except exc.IntegrityError:
-            await self.session.rollback()
-            raise HTTPException(status.HTTP_400_BAD_REQUEST,
-                                self.msg_already_exists)
-        await self.session.refresh(obj)
-        return obj
-'''
+    obj = model(**kwargs)
+    session.add(obj)
+    await session.commit()
+    await session.refresh(obj)
+    return obj

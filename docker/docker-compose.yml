@@ -30,15 +30,11 @@ services:
         condition: service_healthy
     expose:
       - 8000
-    #ports:
-    #  - 81:8000
     env_file:
       - ../.env
 
   frontend:
     image: alexpro1972/hrspace_frontend
-    #expose:
-    #  - 3000
     ports:
       - 81:3000
 

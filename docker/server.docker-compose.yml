@@ -20,15 +20,11 @@ services:
       - db
     expose:
       - 8000
-    #ports:
-    #  - 81:8000
     env_file:
       - ./.env
 
   frontend:
     image: "${DOCKERHUB_USERNAME}/${PROJECT_NAME}_frontend"
-    #expose:
-    #  - 3000
     ports:
       - 81:3000
 

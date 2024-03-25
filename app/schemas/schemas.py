@@ -143,24 +143,6 @@ class VacancyIn(BaseModel):
             raise ValueError("Invalid what_need option")
         return value
 
-    """ @field_validator("work_type")
-    @classmethod
-    def validate_work_type(cls, value_list):
-        for value in value_list:
-            if value not in settings.work_types:
-                raise ValueError("Invalid work_type")
-        return value_list
 
-     @field_validator("number_of_recruiters")
-    @classmethod
-    def validate_number_of_recruiters(cls, value):
-        if value not in settings.number_of_recruiters:
-            raise ValueError("Invalid number of recruiters")
-        return value
-
-    @field_validator("hr_salary_model")
-    @classmethod
-    def validate_hr_salary_model(cls, value):
-        if value not in settings.hr_salary_model:
-            raise ValueError("Invalid hr_salary_model")
-        return value """
+class VacancyOut(Base, VacancyIn):
+    pass

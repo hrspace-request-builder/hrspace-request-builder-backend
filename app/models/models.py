@@ -1,6 +1,7 @@
 from decimal import Decimal
 
-from sqlalchemy import ARRAY, Boolean, ForeignKey, String
+from sqlalchemy import Boolean, ForeignKey, Integer, String
+from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.config import settings
@@ -18,50 +19,36 @@ class GenericModel(Base):
 
 
 class Vacancy(GenericModel):
-    # __tablename__ = "vacancies"
-    # vacancy_name: Mapped[str] = mapped_column(String(settings.name_max_len))
     specialization_id: Mapped[int] = mapped_column(ForeignKey("specialization.id"))
-    specialization: Mapped["Specialization"] = relationship()  # "Specialization")
     city_id: Mapped[int] = mapped_column(ForeignKey("city.id"))
-    city: Mapped["City"] = relationship()  # "City")
     salary_from: Mapped[Decimal]
-    # mapped_column(Decimal(settings.decimal_precision, settings.decimal_scale))
     salary_to: Mapped[Decimal]
-    # mapped_column(Decimal(settings.decimal_precision, settings.decimal_scale))
+    hr_salary: Mapped[Decimal]
+    hr_salary_model: Mapped[int]
+    employee_to_search: Mapped[int]
+    number_of_recruiters: Mapped[int]
+    #
     grade: Mapped[str] = mapped_column(String(settings.grade_max_len))
     experience: Mapped[str] = mapped_column(String(settings.experience_max_len))
-
-    work_type: Mapped[list] = mapped_column(ARRAY(String))
     employment: Mapped[str] = mapped_column(String(settings.employment_max_len))
     registration_type: Mapped[str] = mapped_column(String(settings.reg_type_max_len))
-    """responsibilities: Mapped[list["Responsibility"]] = relationship(
-        # "Responsibility",
-    #    secondary="vacancy_responsibilities",
-    #    back_populates="vacancies",
-    #)
+    when_work: Mapped[str] = mapped_column(String(settings.when_work_max_len))
+    what_need: Mapped[str] = mapped_column(String(settings.what_need_max_len))
+    #
+    work_types: Mapped[list] = mapped_column(ARRAY(String))
+    responsibilities_ids = mapped_column(ARRAY(Integer))
     responsibilities_description: Mapped[str] = mapped_column(
         String(settings.description_max_len)
     )
-    requirements: Mapped[list["Requirement"]] = relationship(  # "Requirement",
-        secondary="vacancy_requirements", back_populates="vacancies"
-    )
+    requirements_ids = mapped_column(ARRAY(Integer))
     requirements_description: Mapped[str] = mapped_column(
         String(settings.description_max_len)
     )
-    conditions: Mapped[list["Condition"]] = relationship(  # "Condition",
-        secondary="vacancy_conditions", back_populates="vacancies"
-    )
+    conditions_ids = mapped_column(ARRAY(Integer))
     conditions_description: Mapped[str] = mapped_column(
         String(settings.description_max_len)
-    )"""
-    hr_salary_model: Mapped[int]  # = mapped_column(Integer)
-    hr_salary: Mapped[Decimal]
-    # mapped_column(Decimal(settings.decimal_precision, settings.decimal_scale))
-    employee_to_search: Mapped[int]  # = mapped_column(Integer)
-    number_of_recruiters: Mapped[int]  # = mapped_column(Integer)
-    when_work: Mapped[str] = mapped_column(String(settings.when_work_max_len))
-    what_need: Mapped[str] = mapped_column(String(settings.what_need_max_len))
-    additional_tasks: Mapped[list] = mapped_column(ARRAY(String))
+    )
+    additional_tasks = mapped_column(ARRAY(String))
     special_requirements: Mapped[str] = mapped_column(
         String(settings.requirements_max_len), default=""
     )
@@ -69,21 +56,22 @@ class Vacancy(GenericModel):
 
     def __repr__(self) -> str:
         return (
-            f"\nvacancy_name: {self.vacancy_name}"
-            f"\nspecialization: {self.specialization}"
+            f"\nid: {self.id}"
+            f"\nname: {self.name}"
+            f"\nspecialization_id: {self.specialization_id}"
             f"\nsalary_from: {self.salary_from}"
             f"\nsalary_to: {self.salary_to}"
             f"\ngrade: {self.grade}"
             f"\nexperience: {self.experience}"
-            f"\ncity: {self.city}"
-            f"\nwork_type: {self.work_type}"
+            f"\ncity_id: {self.city_id}"
+            f"\nwork_type: {self.work_types}"
             f"\nemployment: {self.employment}"
             f"\nregistration_type: {self.registration_type}"
-            f"\nresponsibilities: {self.responsibilities}"
+            f"\nresponsibilities: {self.responsibilities_ids}"
             f"\nresponsibilities_description: {self.responsibilities_description}"
-            f"\nrequirements: {self.requirements}"
+            f"\nrequirements: {self.requirements_ids}"
             f"\nrequirements_description: {self.requirements_description}"
-            f"\nconditions: {self.conditions}"
+            f"\nconditions: {self.conditions_ids}"
             f"\nconditions_description: {self.conditions_description}"
             f"\nhr_salary_model: {self.hr_salary_model}"
             f"\nhr_salary: {self.hr_salary}"

@@ -8,3 +8,5 @@ POSTGRES_PASSWORD=postgrespw
 DB_HOST=db
 DB_PORT=5432
 POSTGRES_DB=postgres
+
+SERVER_HOST=localhost
