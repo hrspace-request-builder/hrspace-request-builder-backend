@@ -62,7 +62,7 @@ class Settings(BaseSettings):
     )
     vacancy_what_need_options: tuple[str, ...] = (
         "Только резюме",
-        "Резюме + результаты собеседования",
+        "Резюме + результаты  собеседования",
     )
     requirements_max_len: int = 2000
 
