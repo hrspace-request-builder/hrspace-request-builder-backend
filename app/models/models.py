@@ -22,14 +22,15 @@ class Vacancy(GenericModel):
     # vacancy_name: Mapped[str] = mapped_column(String(settings.name_max_len))
     specialization_id: Mapped[int] = mapped_column(ForeignKey("specialization.id"))
     specialization: Mapped["Specialization"] = relationship()  # "Specialization")
+    city_id: Mapped[int] = mapped_column(ForeignKey("city.id"))
+    city: Mapped["City"] = relationship()  # "City")
     salary_from: Mapped[Decimal]
     # mapped_column(Decimal(settings.decimal_precision, settings.decimal_scale))
     salary_to: Mapped[Decimal]
     # mapped_column(Decimal(settings.decimal_precision, settings.decimal_scale))
     grade: Mapped[str] = mapped_column(String(settings.grade_max_len))
     experience: Mapped[str] = mapped_column(String(settings.experience_max_len))
-    city_id: Mapped[int] = mapped_column(ForeignKey("city.id"))
-    city: Mapped["City"] = relationship()  # "City")
+
     work_type: Mapped[list] = mapped_column(ARRAY(String))
     employment: Mapped[str] = mapped_column(String(settings.employment_max_len))
     registration_type: Mapped[str] = mapped_column(String(settings.reg_type_max_len))

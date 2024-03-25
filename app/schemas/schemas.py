@@ -138,10 +138,11 @@ class VacancyIn(BaseModel):
 
     @field_validator("what_need")
     @classmethod
-    def validate_what_need(cls, value):
-        if value not in settings.vacancy_what_need_options:
-            raise ValueError("Invalid what_need option")
-        return value
+    def validate_what_need(cls, value_list):
+        for value in value_list:
+            if value not in settings.vacancy_what_need_options:
+                raise ValueError("Invalid what_need option")
+        return value_list
 
     """ @field_validator("work_type")
     @classmethod
