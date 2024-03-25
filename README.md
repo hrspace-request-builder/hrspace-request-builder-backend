@@ -8,6 +8,35 @@
 
 <br>
 
+## Оглавление
+- [Технологии](#технологии)
+- [Описание работы](#описание-работы)
+- [Установка приложения](#установка-приложения)
+- [Запуск приложения](#запуск-приложения)
+- [Удаление приложения](#удаление-приложения)
+- [Авторы](#авторы)
+
+<br>
+
+## Технологии
+<details><summary>Подробнее</summary><br>
+
+[![Python](https://img.shields.io/badge/python-3.12-blue?logo=python)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/-FastAPI-464646?logo=fastapi)](https://fastapi.tiangolo.com/)
+[![Pydantic](https://img.shields.io/badge/-Pydantic-464646?logo=Pydantic)](https://docs.pydantic.dev/)
+[![PostgreSQL](https://img.shields.io/badge/-PostgreSQL-464646?logo=PostgreSQL)](https://www.postgresql.org/)
+[![asyncpg](https://img.shields.io/badge/-asyncpg-464646?logo=PostgreSQL)](https://pypi.org/project/asyncpg/)
+[![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-2.0-blue?logo=sqlalchemy)](https://www.sqlalchemy.org/)
+[![Uvicorn](https://img.shields.io/badge/-Uvicorn-464646?logo=Uvicorn)](https://www.uvicorn.org/)
+[![docker_compose](https://img.shields.io/badge/-Docker%20Compose-464646?logo=docker)](https://docs.docker.com/compose/)
+[![pre-commit](https://img.shields.io/badge/-pre--commit-464646?logo=pre-commit)](https://pre-commit.com/)
+
+[⬆️Оглавление](#оглавление)
+
+</details>
+
+<br>
+
 ## Установка приложения:
 
 <details><summary>Предварительные условия</summary>
@@ -29,6 +58,8 @@ cd hrspace-request-builder-backend
 cp env_example .env
 nano .env
 ```
+
+[⬆️Оглавление](#оглавление)
 
 <br>
 
@@ -60,6 +91,8 @@ docker compose -f docker/docker-compose.yml --env-file .env down
 docker compose -f docker/docker-compose.yml --env-file .env down -v
 ```
 
+[⬆️Оглавление](#оглавление)
+
 <br>
 
 ## Удаление приложения:
@@ -67,3 +100,12 @@ docker compose -f docker/docker-compose.yml --env-file .env down -v
 ```bash
 cd .. && rm -fr hrspace-request-builder-backend
 ```
+
+[⬆️Оглавление](#оглавление)
+
+<br>
+
+## Авторы:
+[Aleksei Proskuriakov](https://github.com/alexpro2022)
+
+[⬆️В начало](#hrspace-request-builder-backend)
