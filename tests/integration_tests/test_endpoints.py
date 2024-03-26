@@ -6,6 +6,7 @@ from httpx import AsyncClient
 from app.api.routers import main_router
 from tests.fixtures import data as d
 
+from ..fixtures.load_csv_data import convert_to_int
 from .utils import Json, check_response, reverse
 
 
@@ -44,3 +45,16 @@ async def test_get_data(load_csv_data, async_client: AsyncClient) -> None:
     response_json = response.json()
     assert response_json
     assert check_response(response_json, d.DATA_EXPECTED) == "DONE"
+
+
+async def test_post_vacancy(init_db, async_client: AsyncClient) -> None:
+    url = reverse(main_router, "create_vacancy")
+    response = await async_client.post(url, json=d.VACANCY_POST_PAYLOAD)
+    assert response.status_code == HTTPStatus.CREATED
+    response_json = response.json()
+    assert response_json
+    convert_to_int([response_json])
+    response_json["show_info"] = bool(response_json["show_info"])
+    assert (
+        check_response(response_json, {**{"id": 1}, **d.VACANCY_POST_PAYLOAD}) == "DONE"
+    )
