@@ -29,6 +29,11 @@
 [![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-2.0-blue?logo=sqlalchemy)](https://www.sqlalchemy.org/)
 [![Uvicorn](https://img.shields.io/badge/-Uvicorn-464646?logo=Uvicorn)](https://www.uvicorn.org/)
 [![docker_compose](https://img.shields.io/badge/-Docker%20Compose-464646?logo=docker)](https://docs.docker.com/compose/)
+[![httpx](https://img.shields.io/badge/-httpx-464646?logo=httpx)](https://www.python-httpx.org/)
+[![Pytest](https://img.shields.io/badge/-Pytest-464646?logo=Pytest)](https://docs.pytest.org/en/latest/)
+[![Pytest-asyncio](https://img.shields.io/badge/-Pytest--asyncio-464646?logo=Pytest-asyncio)](https://pypi.org/project/pytest-asyncio/)
+[![pytest-cov](https://img.shields.io/badge/-pytest--cov-464646?logo=codecov)](https://pytest-cov.readthedocs.io/en/latest/)
+[![deepdiff](https://img.shields.io/badge/-deepdiff-464646?logo=deepdiff)](https://zepworks.com/deepdiff/6.3.1/diff.html)
 [![pre-commit](https://img.shields.io/badge/-pre--commit-464646?logo=pre-commit)](https://pre-commit.com/)
 
 [⬆️Оглавление](#оглавление)
@@ -60,6 +65,18 @@ nano .env
 ```
 
 [⬆️Оглавление](#оглавление)
+
+<br>
+
+## Запуск тестов:
+Из корневой директории проекта выполните команду запуска тестов:
+```bash
+docker compose -f tests/docker/test.docker-compose.yml --env-file .env up --build --abort-on-container-exit && \
+docker compose -f tests/docker/test.docker-compose.yml --env-file .env down -v
+```
+После прохождения тестов в консоль будет выведен отчет pytest и coverage.
+
+⬆️Оглавление
 
 <br>
 
